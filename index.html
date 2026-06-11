@@ -2,9 +2,11 @@
 <html lang="zh-Hans">
 <head>
 <meta charset="UTF-8">
+<script>/* 早执行：在首帧渲染前确定主题，消除深色闪白。无存储时跟随系统偏好。 */
+(function(){try{var t=localStorage.getItem('hxj-theme');var dk=t==='dark'||(t===null&&typeof matchMedia!=='undefined'&&matchMedia('(prefers-color-scheme:dark)').matches);if(dk)document.documentElement.classList.add('dark');}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>华夏纪 · 中国历代王朝</title>
-<meta name="description" content="华夏纪 · 中国历代王朝——自上古三代至清的中华通史。含贯通四千年的主时间轴、23 个王朝专页、跨朝专题、人物总库、朝代对照、全站搜索与都城方位图。">
+<meta name="description" content="华夏纪 · 中国历代王朝——自上古三代至清的中华通史。含贯通四千年的主时间轴、28 个朝代/时期专页、跨朝专题、人物总库、朝代对照、全站搜索与都城方位图。">
 <meta name="theme-color" content="#9c2b22">
 <meta property="og:type" content="website">
 <meta property="og:title" content="华夏纪 · 中国历代王朝">
@@ -22,7 +24,7 @@
   --serif:"Noto Serif SC","Songti SC","STSong","SimSun","Source Han Serif SC",serif;
   --brush:"Noto Serif SC","Songti SC","STSong","SimSun","Source Han Serif SC",serif;
 }
-body.dark{--paper:#1d1a16;--paper2:#16130f;--card:#262019;--ink:#ece3d4;--ink2:#a99a87;--hair:rgba(255,255,255,.11);}
+html.dark,body.dark{--paper:#1d1a16;--paper2:#16130f;--card:#262019;--ink:#ece3d4;--ink2:#a99a87;--hair:rgba(255,255,255,.11);}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:var(--serif);color:var(--ink);line-height:1.7;min-height:100vh;position:relative;overflow-x:clip;transition:background .3s,color .3s;
@@ -141,11 +143,11 @@ select.sortsel{margin-left:auto;font-family:inherit;font-size:12.5px;color:var(-
 .dtitle .big{font-family:var(--brush);font-size:46px;color:var(--accent);line-height:.9}
 .dtitle .full{font-size:20px;font-weight:700;color:var(--ink)}.dtitle .yy{font-size:13px;color:var(--ink2);font-weight:600}
 .dtag{font-size:11px;color:#fff;background:var(--accent);padding:2px 10px;border-radius:20px}
-.subnav{position:sticky;top:53px;z-index:90;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--hair);overflow-x:auto;white-space:nowrap;padding:8px 14px}
+.subnav{position:sticky;top:var(--hdh,53px);z-index:90;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--hair);overflow-x:auto;white-space:nowrap;padding:8px 14px}
 .subnav button{font-size:12.5px;color:var(--ink2);background:none;border:none;padding:6px 11px;margin:0 1px;border-radius:7px;cursor:pointer;font-family:inherit;transition:all .18s}
 .subnav button:hover{color:var(--accent)}
 .subnav button.on{color:#fff;background:var(--accent)}
-.mod{scroll-margin-top:104px;margin-bottom:30px}
+.mod{scroll-margin-top:var(--modtop,104px);margin-bottom:30px}
 .mod h3{font-size:18px;font-weight:700;color:var(--accent);letter-spacing:.06em;display:flex;align-items:center;gap:10px;margin-bottom:13px}
 .mod h3::before{content:'';width:16px;height:2px;background:var(--accent)}
 .metarow{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
@@ -217,7 +219,7 @@ body.dark .evli p{color:var(--ink2)}
 .py{font-style:normal;font-family:ui-sans-serif,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;font-size:.8em;font-weight:400;color:var(--ink2);letter-spacing:.01em;white-space:nowrap}.rn{font-size:18px;font-weight:700;color:var(--ink);font-family:var(--brush);letter-spacing:.02em;flex-shrink:0}
 .rmeta{font-size:11.5px;color:var(--ink2);margin:3px 0 5px}.rulerc p{font-size:11px;color:#473d37;line-height:1.6;margin:0;word-break:break-word}body.dark .rulerc p{color:var(--ink2)}
 .figmini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
-.figmini{background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--accent);border-radius:8px;padding:11px 13px}
+.figmini{background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--accent);border-radius:8px;padding:11px 13px;content-visibility:auto;contain-intrinsic-size:auto 120px}
 .fmh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}.fmn{font-size:15px;font-weight:700;color:var(--ink)}.fmr{font-size:11px;color:var(--accent);font-weight:600}.fmd{font-size:10.5px;color:var(--ink2);margin-left:auto}
 .figmini p{font-size:12px;color:#473d37;line-height:1.6;margin-top:4px}body.dark .figmini p{color:var(--ink2)}
 .figmini.expandable{cursor:pointer}
@@ -475,8 +477,8 @@ body.dark .tnode p{color:var(--ink2)}
   .cards,.tgrid,.cgrid,.rulerlist,.figmini-grid,.cmpgrid{grid-template-columns:1fr}
   .metarow{grid-template-columns:repeat(2,1fr)}
   .dhero{padding:24px 14px 18px}.dtitle .big{font-size:38px}.dtitle .full{font-size:17px}.dtitle .yy{font-size:12px}
-  .subnav{top:46px;padding:7px 10px}.subnav button{font-size:12px;padding:8px 12px}
-  .mod{scroll-margin-top:90px}.mod h3{font-size:16px}
+  .subnav{padding:7px 10px}.subnav button{font-size:12px;padding:8px 12px}
+  .mod h3{font-size:16px}
   .evttl{font-size:13px}
   .rseg{font-size:9px;height:28px}.rseg span{transform:scale(.92)}
   .rich p{font-size:13px}
@@ -538,6 +540,17 @@ body.dark .spec li{color:var(--ink2)}
 .gridlegend{font-size:12px;color:var(--ink2);margin:0 0 12px;line-height:1.6}
 .dw-q{margin-top:7px;padding:7px 10px;background:color-mix(in srgb,var(--gold) 8%,transparent);border-left:2px solid var(--gold);border-radius:0 7px 7px 0;font-size:12px;line-height:1.7;color:var(--ink2);font-family:'Noto Serif SC',serif}
 .csum{font-size:13.5px;line-height:1.78;margin:2px 0 14px;color:var(--ink)}.csum-out{margin:15px 0 2px;padding-top:12px;border-top:1px solid var(--hair);color:var(--ink2);font-size:13px;line-height:1.75}.csum-out b{color:var(--cin);font-weight:700}
+@media print{
+  .hd,.subnav,.fab-back,.iconbtn,.mbtn,.ft,.zoom,.bandreset,.tlhint,.backbtn,.evbar,.evtablebtn,.figcmpbtn,.figcaret,.st-locate,.controls,.chips,.sortsel,.tltip,.evmodal,.modcap-row{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  body::before{display:none!important}
+  .page{display:block!important}
+  .figbio{max-height:none!important;opacity:1!important;overflow:visible!important}
+  .wrap,.tlsec,.dhwrap{max-width:100%!important}
+  a{color:#000!important;text-decoration:none!important}
+  .mod,.dcard,.tcard,.statecard,.cblock,.rulerc{break-inside:avoid;page-break-inside:avoid}
+  .curvebox,.dgwrap,.mapwrap{overflow:visible!important}
+}
 </style>
 </head>
 <body>
@@ -552,8 +565,8 @@ body.dark .spec li{color:var(--ink2)}
     <a data-b="search" href="#/search">搜索</a>
     <a data-b="about" href="#/about">关于</a>
   </nav>
-  <button class="iconbtn" id="themeBtn" title="深色/浅色" onclick="toggleTheme()">◐</button>
-  <button class="iconbtn mbtn" id="mBtn" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+  <button class="iconbtn" id="themeBtn" title="深色/浅色" aria-label="切换深色或浅色模式" onclick="toggleTheme()">◐</button>
+  <button class="iconbtn mbtn" id="mBtn" aria-label="菜单" aria-expanded="false" aria-controls="nav" onclick="toggleNav()">☰</button>
 </header>
 
 
@@ -733,7 +746,7 @@ const DY=[
  {id:'xia',name:'夏',full:'夏朝',s:-2070,e:-1600,pref:1,c:'#6b7a52',founder:'禹',cap:'阳城/斟鄩',eth:'华夏',grp:'ancient',note:'传世第一个世袭王朝，介于信史与传说之间。'},
  {id:'shang',name:'商',full:'商朝',s:-1600,e:-1046,pref:1,c:'#7a5c3e',founder:'汤',cap:'亳 / 殷',eth:'华夏',grp:'ancient',note:'甲骨文与青铜文明，中国信史之始。'},
  {id:'xizhou',name:'西周',full:'西周',s:-1046,e:-771,pref:1,c:'#9c6b3f',founder:'周武王姬发',cap:'镐京',eth:'华夏',grp:'ancient',note:'分封制、宗法制、礼乐文明的奠基。'},
- {id:'dongzhou',name:'东周',full:'东周（春秋·战国）',s:-770,e:-221,pref:1,c:'#b08a3e',founder:'周平王姬宜臼',cap:'洛邑',yslabel:'前770–前256 · 时期迄前221',durlabel:'王室515年（时期549年）',eth:'华夏',grp:'ancient',note:'诸侯争霸、百家争鸣；春秋·战国延续至前221年秦统一。'},
+ {id:'dongzhou',name:'东周',full:'东周（春秋·战国）',s:-770,e:-221,pref:1,c:'#b08a3e',founder:'周平王姬宜臼',cap:'洛邑',yslabel:'前770–前256 · 时期迄前221',durlabel:'王室514年（时期549年）',eth:'华夏',grp:'ancient',note:'诸侯争霸、百家争鸣；春秋·战国延续至前221年秦统一。'},
  {id:'qin',name:'秦',full:'秦朝',s:-221,e:-207,pref:1,c:'#2f2f33',founder:'秦始皇嬴政',cap:'咸阳',eth:'华夏',grp:'qinhan',note:'首次大一统，书同文车同轨，中央集权之始。'},
  {id:'xihan',name:'西汉',full:'西汉',s:-202,e:9,pref:1,c:'#3a4a6b',founder:'刘邦',cap:'长安',eth:'汉',grp:'qinhan',note:'文景之治、汉武盛世，奠定汉民族与丝绸之路。'},
  {id:'xin',name:'新',full:'新朝',s:9,e:23,pref:1,c:'#5a5570',founder:'王莽',cap:'长安',eth:'汉',grp:'qinhan',note:'王莽代汉、托古改制，旋即崩溃。'},
@@ -826,7 +839,7 @@ function fy(y){return y<0?'前'+(-y):y;}
 function fmtYear(y){return y<0?'前'+(-y):y===1?'公元元年':String(y);}
 function ys(d){return d.yslabel||(fy(d.s)+'–'+fy(d.e));}
 function durTxt(d){return d.durlabel||('约'+dur(d)+'年');}
-function dur(d){return d.e-d.s;}
+function dur(d){return d.s<0&&d.e>0?d.e-d.s-1:d.e-d.s;}
 
 /* ========== 主时间轴 ========== */
 const MINY=-2150,MAXY=1925,PAD=26,BARH=34,LANEGAP=22,TOPRES=44;
@@ -858,7 +871,8 @@ function renderTimeline(){
     const inside=w>=cjk*11+5;
     const dim=(bandFocus===null||(d.s<BANDS[bandFocus][1]&&d.e>BANDS[bandFocus][0]))?'':' dim';
     h+='<div class="bar'+(d.sub?' period':'')+dim+'" data-id="'+d.id+'" tabindex="0" role="button" aria-label="'+d.full+'　'+ys(d)+(d.sub?'，含 '+d.sub.length+' 个政权':'')+'" style="left:'+l.toFixed(1)+'px;width:'+w.toFixed(1)+'px;top:'+top+'px;background:'+d.c+'">'+(inside?disp:'')+'</div>';
-    const al=inside?'<span class="du">'+dur(d)+'年</span>':'<b>'+disp+'</b><span class="du">'+dur(d)+'年</span>';
+    const tiny=ppx<0.42;
+    const al=inside?'<span class="du">'+dur(d)+'年</span>':(tiny?'<b>'+disp+'</b>':'<b>'+disp+'</b><span class="du">'+dur(d)+'年</span>');
     h+='<div class="alab'+dim+'" data-id="'+d.id+'" tabindex="0" role="button" aria-label="'+d.full+'　'+ys(d)+'" style="left:'+(l+w/2).toFixed(1)+'px;top:'+(top-16)+'px">'+al+'</div>';
   });
   h+='</div><div class="tlaxis" style="width:'+W+'px">';
@@ -877,7 +891,7 @@ function focusBand(i){bandFocus=(i<0||bandFocus===i)?null:i;renderTimeline();con
   const COARSE=(typeof matchMedia!=='undefined'&&matchMedia('(pointer:coarse)').matches)||(typeof window!=='undefined'&&'ontouchstart' in window);
   let tipFor=null;
   function fillTip(d){tip.innerHTML='<b>'+d.full+'</b> &nbsp;<i>'+ys(d)+'</i><br>开国：'+d.founder+'　都城：'+d.cap+'<br>民族：'+d.eth+'　国祚'+durTxt(d);}
-  function placeTip(cx,cy){let x=cx+14,y=cy+16;if(x+250>innerWidth)x=cx-250;if(x<4)x=4;tip.style.left=x+'px';tip.style.top=y+'px';}
+  function placeTip(cx,cy){let x=cx+14,y=cy+16;if(x+250>innerWidth)x=cx-250;if(x<4)x=4;const th=tip.offsetHeight||80;if(y+th>innerHeight-4)y=cy-th-10;if(y<4)y=4;tip.style.left=x+'px';tip.style.top=y+'px';}
   document.getElementById('tlInner').addEventListener('mousemove',e=>{
     const b=e.target.closest('.bar,.alab');
     if(!b){tip.style.opacity=0;return;}
@@ -889,7 +903,7 @@ function focusBand(i){bandFocus=(i<0||bandFocus===i)?null:i;renderTimeline();con
   if(_tsc)_tsc.addEventListener('scroll',()=>{tip.style.opacity=0;tipFor=null;},{passive:true});
   function tlActivate(b){tip.style.opacity=0;tipFor=null;location.hash='#/dynasty/'+b.dataset.id;}
   document.getElementById('tlInner').addEventListener('click',e=>{
-    const b=e.target.closest('.bar,.alab');if(!b)return;
+    const b=e.target.closest('.bar,.alab');if(!b){tip.style.opacity=0;tipFor=null;return;}
     if(COARSE&&tipFor!==b.dataset.id){fillTip(DY.find(x=>x.id===b.dataset.id));tip.style.opacity=1;placeTip(e.clientX,e.clientY);tipFor=b.dataset.id;return;}
     tlActivate(b);
   });
@@ -899,6 +913,7 @@ function focusBand(i){bandFocus=(i<0||bandFocus===i)?null:i;renderTimeline();con
     e.preventDefault();
     if(b.classList.contains('tlbandlab'))b.click();else tlActivate(b);
   });
+  if(COARSE)document.addEventListener('click',e=>{if(!e.target.closest('#tlInner')){tip.style.opacity=0;tipFor=null;}},{passive:true});
 })();
 
 /* ========== 时段细分时间轴 ========== */
@@ -1099,7 +1114,7 @@ fig:[
 ['戚继光','抗倭名将','1528–1588','练戚家军、创鸳鸯阵荡平倭患，著《纪效新书》，一代军事家。'],
 ['海瑞','一代清官','1514–1587','刚直清廉、备棺上疏直谏，民间尊为"海青天"。'],
 ['严嵩','权奸','1480–1567','以青词得宠、专权二十年，贪黩误国，终被徐阶扳倒。'],
-['李时珍','医药学家','1518–1593','历三十年著《本草纲目》，集中国药物学之大成。'],
+['李时珍','医药学家','1518–1593','历二十七年著《本草纲目》，集中国药物学之大成。'],
 ['宋应星','博物学家','1587–1666','著《天工开物》，详记农业手工业技艺，工艺百科。'],
 ['徐光启','会通中西','1562–1633','与利玛窦合译《几何原本》、主修历书、著《农政全书》。'],
 ['汤显祖','戏曲大家','1550–1616','著《牡丹亭》等"临川四梦"，以情抗理，传奇绝唱。'],
@@ -1188,7 +1203,7 @@ rulers:[
 ['昭宗','李晔','龙纪·天复等','888–904','受制于藩镇与宦官，终为朱温所制。','懿宗李漼'],
 ['哀帝','李柷','天祐','904–907','朱温所立傀儡，禅位于梁，唐亡。','昭宗李晔'],
 ],
-reignsegs:[['武德',618,626,0],['贞观',626,649,1],['永徽·龙朔',649,683,2],['武周',683,705,3],['神龙',705,710,4],['景云',710,712,5],['开元·天宝',712,756,6],['至德·乾元',756,762,7],['广德·大历',762,779,8],['建中·贞元',779,805,9],['永贞',805,806,10],['元和',806,820,11],['长庆',820,824,12],['宝历',824,826,13],['大和·开成',826,840,14],['会昌',840,846,15],['大中',846,859,16],['咸通',859,873,17],['乾符·中和',873,888,18],['龙纪·天复',888,904,19],['天祐',904,907,20]],
+reignsegs:[['武德',618,626,0],['贞观',626,649,1],['永徽·龙朔',649,683,2],['临朝·武周',683,705,3],['神龙',705,710,4],['景云',710,712,5],['开元·天宝',712,756,6],['至德·乾元',756,762,7],['广德·大历',762,779,8],['建中·贞元',779,805,9],['永贞',805,806,10],['元和',806,820,11],['长庆',820,824,12],['宝历',824,826,13],['大和·开成',826,840,14],['会昌',840,846,15],['大中',846,859,16],['咸通',859,873,17],['乾符·中和',873,888,18],['龙纪·天复',888,904,19],['天祐',904,907,20]],
 events:[
 ['618','李渊建唐','太原留守李渊起兵入长安、称帝建唐，逐步统一全国。','政',3],
 ['626','玄武门之变','李世民诛建成、元吉，旋即帝位，是为太宗。','政',3],
@@ -1658,9 +1673,9 @@ rulers:[
 ['神宗','赵顼','熙宁·元丰','1067–1085','任王安石行变法图强，新旧党争由此而炽。','英宗赵曙'],
 ['哲宗','赵煦','元祐·绍圣','1085–1100','元祐更化与绍圣绍述，党争反复无常。','神宗赵顼'],
 ['徽宗','赵佶','崇宁·宣和','1100–1125','工书善画、宠蔡京等六贼，奢靡误国、联金灭辽。','神宗赵顼'],
-['钦宗','赵桓','靖康','1125–1127','仓促即位，靖康之变中与徽宗同被金掳，北宋亡。','徽宗赵佶'],
+['钦宗','赵桓','靖康','1126–1127','宣和七年末徽宗内禅、仓促即位，靖康之变中与徽宗同被金掳，北宋亡。','徽宗赵佶'],
 ],
-reignsegs:[['建隆',960,976,0],['太平兴国',976,997,1],['咸平·景德',997,1022,2],['天圣·庆历',1022,1063,3],['治平',1063,1067,4],['熙宁·元丰',1067,1085,5],['元祐·绍圣',1085,1100,6],['崇宁·宣和',1100,1125,7],['靖康',1125,1127,8]],
+reignsegs:[['建隆',960,976,0],['太平兴国',976,997,1],['咸平·景德',997,1022,2],['天圣·庆历',1022,1063,3],['治平',1063,1067,4],['熙宁·元丰',1067,1085,5],['元祐·绍圣',1085,1100,6],['崇宁·宣和',1100,1126,7],['靖康',1126,1127,8]],
 events:[
 ['960','陈桥兵变','赵匡胤黄袍加身、代周建宋，定都东京。','政',3],
 ['961','杯酒释兵权','太祖宴饮间解除大将兵权，重文抑武、强干弱枝。','政',2],
@@ -1759,7 +1774,7 @@ fig:[
 ],
 story:{note:'以《资治通鉴》（司马光）、《梦溪笔谈》（沈括）与宋词（苏轼等）为线索，把北宋的人与事讲成故事——以下为原创转述，非典籍原文。',links:[[null,'赵匡胤'],[null,'赵匡胤'],[null,'范仲淹'],[null,'王安石'],[null,'司马光'],[null,'苏轼'],[null,'宋徽宗']],eps:[
 ['陈桥兵变','后周大将赵匡胤北征途中，于陈桥驿被部下黄袍加身、拥立为帝。他几乎兵不血刃地取代后周、建立宋朝，结束了五代的纷乱。'],
-['杯酒释兵权','鉴于唐末以来武将专横，赵匡胤在一次酒宴上推心置腹，劝功臣交出兵权、安享富贵。一杯酒，化解了开国功臣的威胁，也开启了宋代重文轻武的国策。'],
+['杯酒释兵权','据后世记载，赵匡胤鉴于唐末以来武将专横，在一次酒宴上推心置腹，劝功臣交出兵权、安享富贵。一杯酒，化解了开国功臣的威胁，也开启了宋代重文轻武的国策。'],
 ['先忧后乐','范仲淹推行庆历新政、整顿吏治，虽遭阻挠而罢，却以先天下之忧而忧、后天下之乐而乐的胸襟，激励了一代又一代士人。'],
 ['王安石变法','面对积贫积弱，王安石锐意变法，推行青苗、募役、保甲诸法以富国强兵。然新法操之过急、用人不当，朝野激烈党争，最终功败垂成。'],
 ['司马光著通鉴','与王安石政见相左的司马光退居洛阳，历时十九年主编《资治通鉴》。这部上起战国、下至五代的编年巨著，意在以史为鉴、资治通今，泽被后世。'],
@@ -2021,14 +2036,14 @@ rulers:[
 ['光武帝','刘秀','建武·中元','25–57','汉室宗亲、中兴汉室，柔道治国、偃武修文。','南顿令刘钦'],
 ['明帝','刘庄','永平','57–75','明章之治，整肃吏治，佛教东传、建白马寺。','光武帝刘秀'],
 ['章帝','刘炟','建初·章和','75–88','宽厚为政、白虎观议经，明章之治。','明帝刘庄'],
-['和帝','刘肇','永元','88–105','窦宪破匈奴、班超定西域，国力达盛而外戚渐起。','章帝刘炟'],
+['和帝','刘肇','永元','88–106','窦宪破匈奴、班超定西域，国力达盛而外戚渐起。','章帝刘炟'],
 ['安帝','刘祜','永初·延光','106–125','殇帝早夭得立，外戚宦官渐乱，政事日非。','清河孝王刘庆'],
 ['顺帝','刘保','永建·汉安','125–144','宦官拥立，跋扈将军梁冀始专权。','安帝刘祜'],
 ['桓帝','刘志','建和·永康','146–167','诛梁冀而宦官五侯专权，党锢之祸起。','蠡吾侯刘翼'],
 ['灵帝','刘宏','熹平·光和','168–189','章帝玄孙入继，卖官鬻爵、党锢之祸，黄巾大起。','解渎亭侯刘苌'],
 ['献帝','刘协','初平·建安','189–220','董卓所立、辗转受制，终禅位曹丕，东汉亡。','灵帝刘宏'],
 ],
-reignsegs:[['建武·中元',25,57,0],['永平',57,75,1],['建初·章和',75,88,2],['永元',88,105,3],['永初·延光',106,125,4],['永建·汉安',125,146,5],['建和·永康',146,168,6],['熹平·光和',168,189,7],['初平·建安',189,220,8]],
+reignsegs:[['建武·中元',25,57,0],['永平',57,75,1],['建初·章和',75,88,2],['永元',88,106,3],['永初·延光',106,125,4],['永建·汉安',125,146,5],['建和·永康',146,168,6],['熹平·光和',168,189,7],['初平·建安',189,220,8]],
 events:[
 ['25','光武中兴','刘秀称帝、重建汉室，定都洛阳，是为东汉。','政',3],
 ['36','统一天下','削平群雄、平定公孙述，海内重归一统。','军',2],
@@ -2124,7 +2139,7 @@ story:{note:'以《汉书》（班固）《论衡》（王充）《说文解字�
 ['光武中兴','刘秀起于布衣，扫平群雄、重建汉室，史称光武中兴。他偃武修文、释放奴婢、轻徭薄赋，又以柔道治国、善待功臣，使饱经战乱的天下重归安定。'],
 ['投笔从戎','班超本是抄书谋生的文吏，一日掷笔长叹：大丈夫当效张骞立功异域。他出使西域，以三十六人纵横诸国、不入虎穴焉得虎子，使西域复归汉室数十年。'],
 ['蔡侯造纸','宦官蔡伦总结前人经验，用树皮、麻头、破布、旧渔网造出轻便价廉的纸。从此文字不再困于笨重的简帛，知识得以广传——这是影响世界的伟大发明之一。'],
-['张衡测地动','太史令张衡博学多才，造浑天仪以演天象，又制地动仪以测地震方位。一次仪器示警陇西有震，众人不信，数日后驿报果至，举朝叹服。'],
+['张衡测地动','太史令张衡博学多才，造浑天仪以演天象，又制地动仪以测地震方位。据《后汉书》载，一次仪器示警陇西有震，众人不信，数日后驿报果至，举朝叹服（其事今多存疑）。'],
 ['神医华佗','华佗医术通神，能以麻沸散施行外科手术，又创五禽戏以强身。相传他欲为曹操开颅治头风，反被疑忌下狱而死，一身绝技竟未能尽传后世。'],
 ['黄巾之乱','东汉末年，外戚宦官交替乱政、土地兼并、民不聊生。张角以太平道聚众，振臂一呼，数十万黄巾军同时举事。乱事虽被镇压，汉室却从此名存实亡。'],
 ['挟天子以令诸侯','群雄并起，曹操迎汉献帝于许都，奉天子以征四方、名正而言顺。从此他东征西讨、削平群雄，为日后三分天下中的曹魏奠定了根基。'],
@@ -2150,7 +2165,7 @@ scene:[
 ['不入虎穴','班超出使鄯善，察觉匈奴使者已至、形势危急，遂率三十六人夜袭匈奴营帐，"不入虎穴，焉得虎子"，一举震慑西域诸国。'],
 ['燕然勒功','窦宪率军大破北匈奴、追亡逐北三千里，登燕然山命班固刻石记功，北匈奴自此远遁西迁，漠北遂平。'],
 ['蔡伦造纸','蔡伦总结改进造纸工艺，以树皮、麻头、破布、旧渔网为原料造出价廉质优的纸，献于和帝、号"蔡侯纸"，深刻改变了人类文明的传播。'],
-['地动仪测震','张衡发明候风地动仪，以精巧机关感应地震方位；一次龙机吐丸而众人未觉，数日后陇西果然来报地震，举世叹服。'],
+['地动仪测震','张衡发明候风地动仪，以精巧机关感应地震方位；史载一次龙机吐丸而众人未觉，数日后陇西果然来报地震，举世叹服（其事今多存疑）。'],
 ['党锢之祸','宦官当道，士人清议抨击、太学生数万声援，宦官诬以"党人"、两兴大狱、禁锢终身，士林元气大伤、汉室人心尽失。'],
 ['黄巾烽火','张角以太平道聚众数十万，约期并起、头裹黄巾，喊出"苍天已死、黄天当立"，八州俱反、汉室震动，揭开了汉末大乱的序幕。'],
 ],
@@ -2441,7 +2456,7 @@ rulers:[
 ['道宗','耶律洪基','清宁·咸雍·大康','1055–1101','在位日久、信谗多疑，皇室内乱、政治渐衰。','兴宗耶律宗真'],
 ['天祚帝','耶律延禧','乾统·天庆·保大','1101–1125','荒怠失政，女真兴起、辽军屡败，亡于金。','昭怀太子耶律濬'],
 ],
-reignsegs:[['神册·天赞',916,926,0],['天显·会同',927,947,1],['天禄',947,951,2],['应历',951,969,3],['保宁·乾亨',969,982,4],['统和·太平',982,1031,5],['景福·重熙',1031,1055,6],['清宁·大康',1055,1101,7],['乾统·保大',1101,1125,8]],
+reignsegs:[['神册·天赞',916,927,0],['天显·会同',927,947,1],['天禄',947,951,2],['应历',951,969,3],['保宁·乾亨',969,982,4],['统和·太平',982,1031,5],['景福·重熙',1031,1055,6],['清宁·大康',1055,1101,7],['乾统·保大',1101,1125,8]],
 events:[
 ['907/916','契丹建国','耶律阿保机统一契丹、916年称帝建国。','政',3],
 ['920','创制契丹文','创制契丹大字、小字，记录民族语言。','文',2],
@@ -2553,10 +2568,11 @@ rulers:[
 ['仁宗','李仁孝','大庆·人庆','1139–1193','尊儒兴学、立科举、定法典，文治极盛。','崇宗李乾顺'],
 ['桓宗','李纯祐','天庆','1193–1206','守成而政渐弛，国势转衰。','仁宗李仁孝'],
 ['襄宗','李安全','应天','1206–1211','篡位自立、附蒙攻金，外患渐迫，西夏渐衰。','越王李仁友'],
-['神宗','李遵顼','光定','1211–1223','宗室废襄宗自立，状元为帝、附蒙攻金。','齐王李彦宗'],
-['末主','李睍','宝义','1223–1227','蒙古围都、出降被杀，西夏亡。','存疑'],
+['神宗','李遵顼','光定','1211–1223','宗室废襄宗自立，状元为帝、附蒙攻金；后传位太子德旺。','齐王李彦宗'],
+['献宗','李德旺','乾定','1223–1226','神宗禅位而立，联金抗蒙、力图自救，忧惧而卒。','神宗李遵顼'],
+['末主','李睍','宝义','1226–1227','献宗侄，蒙古围都而出降被杀，西夏亡。','清平郡王（献宗之兄）'],
 ],
-reignsegs:[['天授',1038,1048,0],['延嗣',1048,1067,1],['大安',1067,1086,2],['天仪',1086,1139,3],['人庆',1139,1193,4],['天庆',1193,1206,5],['应天',1206,1211,6],['光定',1211,1223,7],['宝义',1223,1227,8]],
+reignsegs:[['天授',1038,1048,0],['延嗣',1048,1067,1],['大安',1067,1086,2],['天仪',1086,1139,3],['人庆',1139,1193,4],['天庆',1193,1206,5],['应天',1206,1211,6],['光定',1211,1223,7],['乾定',1223,1226,8],['宝义',1226,1227,9]],
 events:[
 ['1036','创西夏文','元昊命野利仁荣创制西夏文字，记录党项语。','文',2],
 ['1038','元昊称帝','李元昊称帝、建国号大夏，与宋辽鼎立。','政',3],
@@ -3943,15 +3959,17 @@ function sceneCards(a){return '<div class="cgrid">'+a.map((x,i)=>'<div class="cb
 let EVCUR=[],EVSEL=0,EVTCAT='all';
 function evMag(e){if(typeof e[4]==='number')return e[4];return /建[国都宋唐汉明清元]|开国|代[唐周汉魏隋陈梁]|统一|灭亡|亡国|称帝|革命|之变|之乱|盛世|起义|北伐|变法|靖康|甲申|安史|鸦片|辛亥/.test(e[1])?3:2;}
 function evDetailHTML(e,idx,total){if(!e)return '点按曲线上的大事节点，查看该事件详情。';const c=e[3]||(typeof EVCAT!=='undefined'&&EVCAT[e[1]])||'政';const nav=(total&&total>1)?'<div class="evnav"><button class="evnavb" onclick="evNav(-1)"'+(idx<=0?' disabled':'')+'>‹ 前一件</button><span class="evnavc">'+(idx+1)+' / '+total+'</span><button class="evnavb" onclick="evNav(1)"'+(idx>=total-1?' disabled':'')+'>后一件 ›</button></div>':'';return '<span class="evy">'+e[0]+'</span> <b class="evttl">'+e[1]+'</b> <span class="evtag" style="background:'+CATCOL[c]+'">'+CATNAME[c]+'</span><p>'+e[2]+'</p>'+nav;}
-function evControls(evs){if(!evs||!evs.length)return '';EVCUR=evs;EVSEL=0;const cats=[['all','全部'],['政','政治'],['军','军事'],['文','文化'],['外','对外']];const chips=cats.map((c,i)=>'<button class="chip'+(i?'':' on')+'" onclick="evFilter(this,\''+c[0]+'\')">'+c[1]+'</button>').join('');return '<div class="evbar"><div class="chips fchipsrow">'+chips+'</div><button class="evtablebtn" onclick="evShowTable()">大事年表 ▦</button></div><div class="evdetail" id="evdetail">'+evDetailHTML(evs[0],0,evs.length)+'</div>';}
-function evShowTable(){var b=document.getElementById('evtableBody');if(!b)return;var tools=document.getElementById('evtableTools');if(tools){var cats=[['all','全部'],['政','政治'],['军','军事'],['文','文化'],['外','对外']];tools.innerHTML='<div class="evtchips">'+cats.map(function(c,i){return '<button class="chip'+(i?'':' on')+'" onclick="evTblCat(this,\''+c[0]+'\')">'+c[1]+'</button>';}).join('')+'</div><input class="evtsearch" id="evtableSearch" type="text" aria-label="搜索大事或说明" placeholder="搜索大事或说明…" oninput="evTblFilter()">';}var rows=(EVCUR||[]).map(function(e){var c=e[3]||(typeof EVCAT!=='undefined'&&EVCAT[e[1]])||'政';var txt=esc(e[0]+' '+e[1]+' '+e[2]);return '<tr class="evtr" data-cat="'+c+'" data-text="'+txt+'"><td class="evty">'+e[0]+'</td><td><span class="evtag" style="background:'+CATCOL[c]+'">'+CATNAME[c]+'</span></td><td class="evtt">'+e[1]+'</td><td>'+e[2]+'</td></tr>';}).join('');b.innerHTML=py('<table class="evtable"><thead><tr><th>年份</th><th>类别</th><th>大事</th><th>说明</th></tr></thead><tbody>'+rows+'</tbody></table><div class="evtempty" id="evtableEmpty" style="display:none">无匹配的大事</div>');EVTCAT='all';var m=document.getElementById('evtableModal');if(m){m._restoreFocus=document.activeElement;m.classList.add('open');var x=m.querySelector('.evmodal-x');if(x)x.focus();}}
-function evHideTable(){var m=document.getElementById('evtableModal');if(m){m.classList.remove('open');if(m._restoreFocus&&m._restoreFocus.focus){try{m._restoreFocus.focus();}catch(e){}}m._restoreFocus=null;}}
+function evControls(evs){if(!evs||!evs.length)return '';EVCUR=evs;EVSEL=0;EVFCAT='all';const cats=[['all','全部'],['政','政治'],['军','军事'],['文','文化'],['外','对外']];const chips=cats.map((c,i)=>'<button class="chip'+(i?'':' on')+'" onclick="evFilter(this,\''+c[0]+'\')">'+c[1]+'</button>').join('');return '<div class="evbar"><div class="chips fchipsrow">'+chips+'</div><button class="evtablebtn" onclick="evShowTable()">大事年表 ▦</button></div><div class="evdetail" id="evdetail">'+evDetailHTML(evs[0],0,evs.length)+'</div>';}
+function evShowTable(){var b=document.getElementById('evtableBody');if(!b)return;var tools=document.getElementById('evtableTools');if(tools){var cats=[['all','全部'],['政','政治'],['军','军事'],['文','文化'],['外','对外']];tools.innerHTML='<div class="evtchips">'+cats.map(function(c,i){return '<button class="chip'+(i?'':' on')+'" onclick="evTblCat(this,\''+c[0]+'\')">'+c[1]+'</button>';}).join('')+'</div><input class="evtsearch" id="evtableSearch" type="text" aria-label="搜索大事或说明" placeholder="搜索大事或说明…" oninput="evTblFilter()">';}var rows=(EVCUR||[]).map(function(e){var c=e[3]||(typeof EVCAT!=='undefined'&&EVCAT[e[1]])||'政';var txt=esc(e[0]+' '+e[1]+' '+e[2]);return '<tr class="evtr" data-cat="'+c+'" data-text="'+txt+'"><td class="evty">'+e[0]+'</td><td><span class="evtag" style="background:'+CATCOL[c]+'">'+CATNAME[c]+'</span></td><td class="evtt">'+e[1]+'</td><td>'+e[2]+'</td></tr>';}).join('');b.innerHTML=py('<table class="evtable"><thead><tr><th>年份</th><th>类别</th><th>大事</th><th>说明</th></tr></thead><tbody>'+rows+'</tbody></table><div class="evtempty" id="evtableEmpty" style="display:none">无匹配的大事</div>');EVTCAT='all';var m=document.getElementById('evtableModal');if(m){m._restoreFocus=document.activeElement;m.classList.add('open');document.body.style.overflow='hidden';var x=m.querySelector('.evmodal-x');if(x)x.focus();}}
+function evHideTable(){var m=document.getElementById('evtableModal');if(m){m.classList.remove('open');document.body.style.overflow='';if(m._restoreFocus&&m._restoreFocus.focus){try{m._restoreFocus.focus();}catch(e){}}m._restoreFocus=null;}}
 function evTblCat(btn,cat){var p=btn.parentElement;p.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});btn.classList.add('on');EVTCAT=cat;evTblFilter();}
 function evTblFilter(){var cat=EVTCAT||'all';var si=document.getElementById('evtableSearch');var q=si?si.value.trim():'';var rows=document.querySelectorAll('#evtableBody .evtr'),shown=0;rows.forEach(function(r){var okc=(cat==='all'||r.getAttribute('data-cat')===cat);var okq=(!q||(r.getAttribute('data-text')||'').indexOf(q)>=0);var ok=okc&&okq;r.style.display=ok?'':'none';if(ok)shown++;});var emp=document.getElementById('evtableEmpty');if(emp)emp.style.display=shown?'none':'block';}
 function evPick(i){const e=EVCUR[i];if(!e)return;EVSEL=i;document.querySelectorAll('#m-ov .evnode2').forEach(g=>g.classList.toggle('sel',+g.dataset.i===i));const box=document.getElementById('evdetail');if(box){box.innerHTML=py(evDetailHTML(e,i,EVCUR.length));box.classList.remove('flash');void box.offsetWidth;box.classList.add('flash');}}
-function evNav(dir){if(!EVCUR||!EVCUR.length)return;var n=Math.max(0,Math.min(EVCUR.length-1,(EVSEL||0)+dir));if(n!==EVSEL)evPick(n);}
+function evCat(e){return e[3]||(typeof EVCAT!=='undefined'&&EVCAT[e[1]])||'政';}
+function evNav(dir){if(!EVCUR||!EVCUR.length)return;var n=(EVSEL||0);for(var step=0;step<EVCUR.length;step++){n+=dir;if(n<0||n>EVCUR.length-1)return;if(EVFCAT==='all'||evCat(EVCUR[n])===EVFCAT){if(n!==EVSEL)evPick(n);return;}}}
 document.addEventListener('keydown',function(ev){var modal=document.getElementById('evtableModal');if(ev.key==='Escape'&&modal&&modal.classList.contains('open')){evHideTable();return;}if(ev.key==='Tab'&&modal&&modal.classList.contains('open')){var f=modal.querySelectorAll('button,input,[tabindex="0"]');if(f.length){var first=f[0],last=f[f.length-1];if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus();}else if(!modal.contains(document.activeElement)){ev.preventDefault();first.focus();}}return;}if((ev.key==='ArrowLeft'||ev.key==='ArrowRight')&&(!modal||!modal.classList.contains('open'))){var ae=document.activeElement;if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'))return;var det=document.getElementById('evdetail');if(det&&det.offsetParent!==null){evNav(ev.key==='ArrowLeft'?-1:1);ev.preventDefault();}}});
-function evFilter(btn,cat){btn.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));btn.classList.add('on');const sv=document.querySelector('#m-ov .csvg');if(sv)sv.setAttribute('data-filter',cat);}
+let EVFCAT='all';
+function evFilter(btn,cat){btn.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));btn.classList.add('on');EVFCAT=cat;const sv=document.querySelector('#m-ov .csvg');if(sv)sv.setAttribute('data-filter',cat);if(cat!=='all'&&EVCUR&&EVCUR.length&&evCat(EVCUR[EVSEL]||{})!==cat){for(var i=0;i<EVCUR.length;i++){if(evCat(EVCUR[i])===cat){evPick(i);break;}}}}
 const FIGRATE={诸葛亮:[5,5,5,4],李世民:[5,3,5,5],王安石:[5,4,5,2],张居正:[5,3,5,3],秦始皇:[5,2,5,1],汉武帝:[5,3,5,3],曹操:[5,2,5,4],王莽:[4,2,2,1],杨广:[5,2,4,1],武则天:[5,2,5,4],王阳明:[5,5,5,5],雍正:[5,3,5,3],杨坚:[5,4,5,3],李隆基:[5,3,4,2],康熙:[5,4,5,4],商鞅:[5,2,5,2],李斯:[5,2,5,1],霍光:[4,3,5,3],赵匡胤:[5,4,5,4],忽必烈:[5,3,5,2],多尔衮:[5,3,5,2],曾国藩:[4,5,4,5],韩信:[5,3,2,1],范仲淹:[5,5,5,5],司马光:[5,5,3,3],岳飞:[5,5,3,2],文天祥:[3,5,3,2],谢安:[4,4,5,5],于谦:[5,5,5,3],林则徐:[5,5,5,3],李鸿章:[5,3,5,3],慈禧:[4,1,2,1],孙中山:[4,5,5,2],乾隆:[5,2,2,2]};
 function radarSVG(r){var cx=48,cy=48,mx=34,a=[-1.5708,0,1.5708,3.1416];function P(i,rad){return (cx+rad*Math.cos(a[i])).toFixed(1)+','+(cy+rad*Math.sin(a[i])).toFixed(1);}var grid='';[mx,mx*0.6,mx*0.3].forEach(function(g){grid+='<polygon points="'+[0,1,2,3].map(function(i){return P(i,g);}).join(' ')+'" class="rdgrid"/>';});var ax='';[0,1,2,3].forEach(function(i){var p=P(i,mx).split(',');ax+='<line x1="48" y1="48" x2="'+p[0]+'" y2="'+p[1]+'" class="rdgrid"/>';});var poly='<polygon points="'+[0,1,2,3].map(function(i){return P(i,r[i]/5*mx);}).join(' ')+'" class="rdfill"/>';var dot='';[0,1,2,3].forEach(function(i){var p=P(i,r[i]/5*mx).split(',');dot+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="2" class="rddot"/>';});var lab='<text x="48" y="11" class="rdlab">才</text><text x="89" y="51" class="rdlab">德</text><text x="48" y="94" class="rdlab">识</text><text x="7" y="51" class="rdlab">度</text>';return '<div class="frad"><svg viewBox="0 0 96 96" style="width:82px;height:82px">'+grid+ax+poly+dot+lab+'</svg></div>';}
 function rateHTML(r){if(!r)return '';const dim=['才','德','识','度'];return '<div class="fratewrap" title="许倬云《从历史看人物》式评断（编者酌定，仅供参照）">'+radarSVG(r)+'<div class="frate">'+dim.map((k,i)=>'<span class="frcell"><b>'+k+'</b>'+[1,2,3,4,5].map(v=>'<i class="fdot'+(v<=r[i]?' on':'')+'"></i>').join('')+'</span>').join('')+'</div></div>';}
@@ -4048,7 +4066,7 @@ nanchao:{
 ov:`<p style="margin:2px 0 14px;padding-left:11px;border-left:3px solid var(--gold);color:var(--ink2);font-size:13.5px;line-height:1.78">唐长孺对南朝有一精到判断：东晋以来煊赫的门阀至此盛极而衰，皇权转而“寒人掌机要”、以武将典兵——宋齐梁陈的篡弑频仍，正是门阀政治走向衰亡、而新秩序尚未确立的过渡之象。</p><p>南朝（420–589）指继东晋之后、在南方建康（今南京）相继更替的宋、齐、梁、陈四个汉族政权，与北方的北朝南北对峙，合称"南北朝"。南朝上承东晋衣冠、保全华夏正朔，虽政权频繁更迭、多有骨肉相残与权臣篡夺，然江南经济持续开发、文化艺术高度繁荣。</p><p>刘宋为南朝最强，宋武帝刘裕气吞万里、"元嘉之治"一度兴盛；南齐短促；南梁武帝萧衍在位近半世纪、佞佛崇文，却酿"侯景之乱"几使江南残破；南陈偏安一隅、国力最弱，终为隋所灭、南北重归一统。南朝是骈文、声律、书画、佛学极盛的时代，文人荟萃、风流相尚，奠定了此后中国文学艺术的诸多根基。</p>`,
 states:[
 ['刘宋','420–479','汉·刘裕','南朝第一个、也是最强盛的王朝。寒门英雄刘裕代晋而立，宋文帝时"元嘉之治"政治清明、经济繁荣；后宗室相残、国势中衰，终为南齐所代。',1,'建康（今南京）',[['420','刘裕代晋建宋'],['424','文帝即位，元嘉之治'],['450','元嘉北伐失利，国势中衰']]],
-['南梁','502–557','汉·萧衍','梁武帝萧衍在位近半世纪、文治昌盛、佞佛舍身，前期号称小康；然晚年昏聩，引发"侯景之乱"、台城陷落、江南残破，由盛转衰。',1,'建康（今南京）',[['502','萧衍代齐建梁'],['527','武帝舍身同泰寺'],['548','侯景之乱，台城陷落']]],
+['南梁','502–557','汉·萧衍','梁武帝萧衍在位近半世纪、文治昌盛、佞佛舍身，前期号称小康；然晚年昏聩，引发"侯景之乱"、台城陷落、江南残破，由盛转衰。',1,'建康（今南京）',[['502','萧衍代齐建梁'],['527','武帝舍身同泰寺'],['548','侯景之乱起'],['549','台城陷落，武帝困死']]],
 ['南陈','557–589','汉·陈霸先','南朝最后、疆域国力最弱的王朝。陈霸先于侯景乱后收拾残局而立，偏安江左；末主陈叔宝荒淫，终为隋军所灭，南北朝结束。',1,'建康（今南京）',[['557','陈霸先代梁建陈'],['573','吴明彻太建北伐'],['589','隋灭陈，南北归一']]],
 ['南齐','479–502','汉·萧道成','萧道成代宋而立、国祚最短（仅二十余年）。前期"永明之治"尚称安定、文学声律大兴（永明体），后期宗室屠戮、迅速崩亡。',0,'建康（今南京）',[['479','萧道成代宋建齐'],['483','永明之治，声律大兴'],['502','为萧衍所代']]],
 ],pol:[['门阀渐衰','东晋以来的高门士族至南朝渐失实权。'],['寒人掌机要','皇权重用寒门掌中枢要务、典机密。'],['武将执兵','以次门武将掌兵权，制衡门阀。'],['篡弑频仍','宋齐梁陈四代更迭，多骨肉相残、权臣篡位。'],['国祚短促','政权动荡，四代不足一百七十年。']],eco:[['江南开发','三吴、太湖流域水利兴修、稻作发达。'],['扬一益二','扬州、益州富甲天下，工商繁荣。'],['建康繁华','都城建康人口百万、市肆云集。'],['海舶通商','广州等地海舶往来，与南海诸国贸易。'],['重心南移','北人南迁助力，经济重心持续南倾。']],mil:[['以武开国','宋武帝刘裕以北府武力代晋、气吞万里。'],['北伐进取','元嘉年间屡谋北伐，终成“元嘉草草”之憾。'],['武备渐弛','后期重门第文治，武备废弛。'],['侯景之乱','梁末侯景作乱，江南残破、元气大伤。'],['江陵焚书','梁元帝江陵焚书，典籍遭浩劫。']],cul:[['永明声律','沈约等讲求声律、开“永明体”，律诗之先声。'],['文心雕龙','刘勰《文心雕龙》体系恢宏，文论之巅峰。'],['诗品文选','钟嵘《诗品》品第诗人，萧统《文选》编次百代之文。'],['佛学昌盛','梁武帝佞佛，佛理与玄学交融。'],['审美自觉','文笔之辨、缘情绮靡，文学高度自觉。']],art:[['谢赫六法','谢赫《古画品录》立“六法”，以“气韵生动”为首。'],['书画并盛','书法承二王之绪，绘画讲求传神。'],['佛教造像','南朝石刻、造像清秀俊逸，自具风格。'],['陵墓石刻','南朝陵墓的辟邪、麒麟石兽雄健生动。'],['审美成熟','理论与创作并进，标志艺术自觉之成熟。']],eth:[['南北对峙','与北朝隔淮、汉相峙，互称“岛夷”“索虏”。'],['争夺正朔','南朝以华夏正统自居，视北朝为夷狄。'],['招抚蛮俚','对境内蛮、俚等族开发招抚，渐入编户。'],['通使往来','南北之间亦有使节往来、文化交流。'],['分中有合','虽分裂对峙，文化人群仍在融汇。']],secsum:{pol:['南朝政治的大势，唐长孺有精到的揭示：东晋以来煊赫的门阀，至此盛极而衰；皇权为摆脱士族的掣肘，转而“寒人掌机要”——以出身寒微者典掌中枢、以武将执兵权。','于是宋、齐、梁、陈四代，皇权虽借寒人、武将之力有所伸张，却也陷入“主威独运而骨肉相残”的怪圈，篡弑频仍、国祚短促。南朝政治，是门阀政治走向衰亡、而新的稳定秩序尚未建立的一段过渡——旧的已去，新的未来。'],eco:['南朝经济，延续着东晋以来江南开发的势头：太湖流域、三吴之地水利兴修、稻作发达，城市（建康）与商业空前繁荣，“扬一益二”之说渐次成形。','北人南迁带来的劳力与技术，加上相对安定的环境，使南方经济持续上扬——经济重心南移的进程，在南朝大大加速。当北方尚在胡汉整合的阵痛中时，江南已悄然积累起日后“赋出天下而江南居十九”的雄厚基础。'],mil:['南朝的军事，呈“以武开国、以文守成”的循环：宋武帝刘裕以北府武力代晋立国、气吞万里如虎；然其后诸朝渐重门第文治、武备废弛。','南朝前期尚能北伐进取（元嘉草草、终成憾事），后期则在侯景之乱中元气大伤、江陵焚书更是文化浩劫。偏安政权“重文轻武”的积弊，使南朝在与北朝的长期对峙中渐落下风——南北的天平，正缓缓向北方倾斜。'],cul:['南朝是中国文学艺术高度自觉的时代：声律论起（永明体）、文笔之辨兴，刘勰《文心雕龙》、钟嵘《诗品》先后问世，把文学批评推向系统化的高峰。','萧统《文选》编次百代之文、确立了“文”的经典谱系；山水诗、宫体诗各擅其美。南朝以政治之乱、成就文艺之盛，再次印证：精致的审美自觉，往往诞生于偏安而优裕的土壤。这份对“文”的极致讲究，深刻塑造了后世的文学传统。'],art:['南朝艺术，绘画与书法承东晋之绪而益精：谢赫《古画品录》提出“六法”，以“气韵生动”为第一义，为中国画立下千古不易的法则。','“气韵生动”四字，把顾恺之以来“重神韵”的追求凝练成一条美学纲领，至今仍是品评中国画的圭臬。南朝在绘画理论上的这一总结，连同其精丽的书法、雕塑，标志着中国艺术审美自觉的成熟。'],eth:['南朝与北朝长期对峙、互称“岛夷”“索虏”，彼此都以华夏正统自居——这种南北分立而争正朔的格局，是南朝民族关系的主轴。','对内，南朝亦持续开发、招抚南方的“蛮”“俚”等族，使之渐入编户。南北虽分裂对峙，文化与人群却在分中有合：当隋一统天下时，南北数百年积累的差异，终将重新熔铸为一个更丰富的“中国”。']},
@@ -4064,14 +4082,14 @@ states:[
 ],pol:[['北魏统一','鲜卑拓跋部建北魏、439年统一北方。'],['孝文汉化','迁都洛阳、改姓易服、定族姓、奖通婚。'],['关陇集团','西魏宇文泰融合胡汉、缔造关陇统治集团。'],['六镇之乱','北魏后期六镇起义、政局动荡、分裂东西。'],['北周一统','北周武帝灭佛强兵、攻灭北齐、再统北方。']],eco:[['均田制','孝文帝行均田、按口授田，恢复北方农业。'],['三长制','立三长以核户口、征赋役，强化基层。'],['租调制','配均田行租调，赋役有定、轻徭薄敛。'],['农业复苏','战后北方经济借均田渐次复苏。'],['立国之本','均田等制下启隋唐、为盛世奠基。']],mil:[['府兵制','西魏宇文泰创府兵、兵农合一、根植均田。'],['六镇武力','北镇鲜卑武力强悍，影响北朝政局。'],['关陇为根','府兵与关陇集团相依，为北周隋之资。'],['北周灭齐','以府兵之强，北周攻灭北齐、统一北方。'],['下启隋唐','府兵经隋入唐、支撑盛唐武功。']],cul:[['佛教鼎盛','北朝崇佛，寺塔林立、僧众极多。'],['石窟开凿','云冈、龙门石窟相继开凿、气象雄浑。'],['北朝民歌','《敕勒歌》《木兰诗》质朴苍劲、独具风骨。'],['胡汉交融','胡风与汉礼交汇，文化刚健质朴。'],['注入新血','塞外劲健为中原文化注入生机。']],art:[['云冈造像','前期造像雄浑古朴、带犍陀罗与凉州遗风。'],['龙门秀骨','汉化后渐趋秀骨清像、褒衣博带。'],['胡貌渐汉','造像由“胡貌”渐染“汉风”，融合可见。'],['墓室壁画','北朝墓葬壁画生动，记录胡汉生活。'],['北碑书法','魏碑雄强朴拙，自成一体。']],eth:[['鲜卑入主','拓跋鲜卑等北族入主中原、统御诸族。'],['孝文汉化','改汉姓、禁胡服胡语、奖胡汉通婚。'],['主动融合','孝文帝主动把本族融入华夏，最为自觉。'],['双向再造','汉人亦吸纳北族勇健之风，双向交融。'],['为隋唐铺路','胡汉一家的格局，为隋唐恢宏奠基。']],secsum:{pol:['北朝政治的枢纽，在北魏孝文帝的汉化改革。陈寅恪、唐长孺都极重此举：迁都洛阳、改姓易服、定族姓、奖通婚，孝文帝以雷霆之力把鲜卑政权导入华夏轨道。','更深远的，是陈寅恪所揭示的“关陇集团”：西魏宇文泰融合胡汉、缔造出一个兼综文武的统治集团，为西魏北周隋唐四代奠定根基。北朝看似“胡”，却在制度上完成了承前启后的再造——隋唐的强盛，正是从这里生长出来的。'],eco:['北朝经济史上影响最巨的，是北魏孝文帝颁行的“均田制”：把无主荒地按口授予农民、还受有度，以恢复战乱后的农业、把人口与土地重新编入国家。','均田制不仅使北方经济复苏，更成为隋唐两代的立国之本，并与租庸调、府兵制环环相扣。陈寅恪所谓“隋唐制度渊源”，于经济一端正落在北朝——后世盛世的根基，许多都可上溯于此。'],mil:['北朝军事的伟大创制，是西魏宇文泰建立的“府兵制”：寓兵于农、平时耕作、战时从征，兵农合一而根植于均田与关陇集团。','府兵制把军事力量与土地、户籍、统治集团熔为一体，造就了一支既能征战、又不脱离生产的劲旅，为北周灭齐、隋的统一提供了军事保障。这一制度经隋入唐、支撑起盛唐武功——其源头，正在北朝。'],cul:['北朝文化，以胡汉交融的刚健质朴为特色：佛教鼎盛，云冈、龙门石窟相继开凿、气象雄浑；民歌如《敕勒歌》《木兰诗》质朴苍劲，迥异于南朝的绮靡。','陈寅恪曾形容这种新生：是塞外的劲健，为暮气深重的中原文化注入了新血。云冈龙门的佛影、敕勒木兰的歌声，连同孝文帝引入的儒礼，共同熔铸出一种雄大刚健的北方文化——它将与南朝的精致，在隋唐合流。'],art:['北朝艺术的巅峰，是云冈与龙门石窟：前期造像雄浑古朴、犹带犍陀罗与凉州遗风，孝文帝汉化之后则渐趋秀骨清像、褒衣博带，呈现“汉化”的鲜明轨迹。','石窟造像由“胡貌”而渐染“汉风”，正是北朝民族与文化融合在艺术上的直观投影。云冈的浑厚、龙门的清丽，连同墓室壁画与北碑书法的雄强，共同奠定了北朝雄健刚劲的艺术格调。'],eth:['北朝是中国民族大融合的主舞台：鲜卑等北族入主中原，在二三百年间与汉族深度交融——而孝文帝的汉化，则是这场融合中最自觉、最彻底的一次推动。','改鲜卑姓为汉姓、禁胡服胡语、奖胡汉通婚，孝文帝主动把本族融入华夏；与此同时，汉人也吸纳了北族的勇健之风。北朝的民族融合，不是谁吞并谁，而是双向的再造——它为隋唐“胡汉一家”的恢宏格局铺平了道路。']},
 },
 wudai:{
-ov:`<p style="margin:2px 0 14px;padding-left:11px;border-left:3px solid var(--gold);color:var(--ink2);font-size:13.5px;line-height:1.78">欧阳修作《新五代史》，对这半个世纪的“礼崩乐坏、纲常扫地”痛心疾首。史家多视五代为唐末藩镇与武人政治的延续：骄兵悍将废立天子，直到后周世宗、宋太祖重建文治秩序，才结束了这“兵强马壮者为之”的乱局。</p><p>五代（907–960）指唐亡之后、在中原相继更替的后梁、后唐、后晋、后汉、后周五个朝代，是唐末藩镇割据的延续、武人乱政的时代，与南方的"十国"并称"五代十国"。这五朝皆以开封或洛阳为都、自居正统，然国祚短促、更迭频繁，半个世纪间五朝更迭、八姓十三君，骄兵悍将废立皇帝，纲常扫地。</p><p>后梁由灭唐的朱温所建；后唐、后晋、后汉的统治者多出沙陀，其中后晋石敬瑭割燕云十六州、自称"儿皇帝"，贻患数百年。至后周，郭威、柴荣（周世宗）励精图治、整军经武、革除积弊，国力骤强、锐意统一，惜柴荣早逝。其部将赵匡胤陈桥兵变、代周建宋，五代结束，北宋遂以后周为基业、逐步统一全国。</p>`,
+ov:`<p style="margin:2px 0 14px;padding-left:11px;border-left:3px solid var(--gold);color:var(--ink2);font-size:13.5px;line-height:1.78">欧阳修作《新五代史》，对这半个世纪的“礼崩乐坏、纲常扫地”痛心疾首。史家多视五代为唐末藩镇与武人政治的延续：骄兵悍将废立天子，直到后周世宗、宋太祖重建文治秩序，才结束了这“兵强马壮者为之”的乱局。</p><p>五代（907–960）指唐亡之后、在中原相继更替的后梁、后唐、后晋、后汉、后周五个朝代，是唐末藩镇割据的延续、武人乱政的时代，与南方的"十国"并称"五代十国"。这五朝皆以开封或洛阳为都、自居正统，然国祚短促、更迭频繁，半个世纪间五朝更迭、五姓十三君，骄兵悍将废立皇帝，纲常扫地。</p><p>后梁由灭唐的朱温所建；后唐、后晋、后汉的统治者多出沙陀，其中后晋石敬瑭割燕云十六州、自称"儿皇帝"，贻患数百年。至后周，郭威、柴荣（周世宗）励精图治、整军经武、革除积弊，国力骤强、锐意统一，惜柴荣早逝。其部将赵匡胤陈桥兵变、代周建宋，五代结束，北宋遂以后周为基业、逐步统一全国。</p>`,
 states:[
 ['后周','951–960','郭威 / 柴荣','郭威代汉而立，世宗柴荣英明神武、整军理财、南征北伐、锐意统一，为北宋统一奠基；柴荣早逝，部将赵匡胤遂代周建宋。',1,'开封（今河南开封）',[['951','郭威代汉建周'],['954','世宗柴荣即位，整军理财'],['959','柴荣早逝'],['960','赵匡胤陈桥兵变代周']]],
 ['后唐','923–936','沙陀·李存勖','沙陀李克用之子李存勖灭后梁而立、自称续唐，一度强盛、疆域最广；庄宗宠伶人而乱政，旋即内乱而亡。',1,'洛阳（今河南洛阳）',[['923','李存勖灭后梁建后唐'],['926','庄宗死于兵变'],['936','为后晋所灭']]],
 ['后晋','936–947','沙陀·石敬瑭','石敬瑭借契丹之力灭后唐而立，割燕云十六州、自称"儿皇帝"，贻患中原数百年；后与契丹交恶、为辽所灭。',1,'开封（今河南开封）',[['936','石敬瑭借契丹灭后唐'],['938','割燕云十六州予契丹'],['947','为契丹所灭']]],
 ['后梁','907–923','宣武·朱温','灭唐建梁的朱温所立、都开封，五代之始；与河东李克用父子血战不休，后为后唐所灭。',0,'开封（今河南开封）',[['907','朱温代唐建梁，五代始'],['912','朱温为子所弑'],['923','为后唐所灭']]],
 ['后汉','947–951','沙陀·刘知远','刘知远乘契丹北撤而立、国祚最短（仅四年），君臣猜忌、诛戮功臣，旋为后周所代。',0,'开封（今河南开封）',[['947','刘知远乘契丹北撤而立'],['948','高祖死，隐帝立'],['951','为郭威所代']]],
-],pol:[['武人政治','骄兵悍将拥立废黜天子，纲常扫地。'],['频繁篡代','五十余年五朝相代、八姓十三君。'],['藩镇延续','沿唐末藩镇之习，节度使权重一方。'],['枢密用事','枢密院掌机要，武人秉政。'],['后周改革','郭威、柴荣励精图治、整军经武、革除积弊。']],eco:[['中原残破','战乱频仍，中原经济凋敝、民生困苦。'],['横征暴敛','军费浩繁、赋役苛重，民不聊生。'],['南方反盛','相较中原，南方诸国得以保境息民。'],['漕运疏浚','后周等疏浚漕渠、劝课农桑，稍有恢复。'],['货币紊乱','铸币杂乱、币值不稳，商旅维艰。']],mil:[['骄兵悍将','牙兵跋扈，动辄哗变、废立君主。'],['沙陀劲旅','后唐、后晋、后汉多倚沙陀骑兵之力。'],['燕云之失','后晋石敬瑭割燕云十六州、贻患数百年。'],['禁军改革','后周世宗整顿禁军、汰弱留强。'],['统一之机','周世宗北伐南征、锐意统一，惜早逝。']],cul:[['文教衰微','战乱之中，中原文教一度凋零。'],['冯道印经','冯道主持雕印儒家经典，刊刻“九经”。'],['词体渐兴','燕乐曲子词流行，为宋词张本。'],['花间一脉','西蜀《花间集》辑录词作，词风香软。'],['承唐启宋','文化于乱世中艰难延续、下启两宋。']],art:[['北方山水','荆浩、关仝开北方山水画派，气势雄峻。'],['南唐画院','南唐设画院，董源、巨然写江南山水。'],['人物传神','顾闳中《韩熙载夜宴图》传神写照。'],['书法承唐','杨凝式书法上承唐法、下启宋意。'],['承前启后','五代绘画为宋代山水巅峰张本。']],eth:[['沙陀建国','沙陀等内迁民族入主中原、建立数朝。'],['契丹崛起','北方契丹（辽）兴起，屡干中原之政。'],['燕云入辽','石敬瑭割燕云，契丹势力深入华北。'],['民族交融','沙陀等族渐融入汉地、难分彼此。'],['南诏大理','西南南诏、大理并立，各自发展。']],secsum:{pol:['五代政治，是唐末藩镇与武人之祸的延续。欧阳修作《新五代史》，对这半个世纪的“礼崩乐坏、纲常扫地”痛心疾首：骄兵悍将废立天子，所谓“天子兵强马壮者当为之”，纲常伦理荡然无存。','史家多视五代为一段“武人政治”的乱局：政权五十余年间五朝相代、八姓十三君如走马灯般更替。直到后周世宗柴荣励精图治、重整文治武功，统一的曙光才再度显现——其未竟之业，终由代周而立的宋太祖完成。'],eco:['五代的经济，深受战乱与武人苛政之累：中原屡经兵燹、横征暴敛，民生凋敝；唯赖后周等较有为的政权疏浚漕运、劝课农桑，才稍见恢复。','与中原的残破相比，同时期南方的“十国”却因相对安定而经济渐盛——这一南北的反差，恰恰加速了中国经济重心的进一步南移。乱世的中原失去的，正是南方悄然积累的。'],mil:['五代的军事，是“兵骄则逐帅、帅强则叛上”的恶性循环：牙兵悍将操纵废立，武力凌驾于一切之上。后晋石敬瑭更割让燕云十六州、自称“儿皇帝”，为中原王朝留下数百年的边防之痛。','转机出现在后周：世宗柴荣大力整顿禁军、汰弱留强，又北伐契丹、南征江淮，锐意统一。这支被重塑的精锐之师，最终成了赵匡胤陈桥兵变、开创赵宋的资本——五代的军事乱局，终于在制度的重建中走向终结。'],cul:['五代中原文教虽因战乱而衰微，却也有不可忽视的文化之举：后唐、后周间冯道主持雕版刊印儒家“九经”，开官方大规模印书之先河，为典籍的保存与普及立下大功。','而词这一新兴文体，正于五代悄然兴起——无论是西蜀《花间集》的香软，还是南唐李煜的沉痛，都为即将到来的宋词盛世埋下了种子。五代是承唐启宋的过渡，文脉于乱世中并未中断。'],art:['五代虽乱，绘画却悄然臻于一个高峰：荆浩、关仝开北方山水之雄峻，董源、巨然写江南山水之秀润，南北二派于此奠定；顾闳中《韩熙载夜宴图》更是人物画传神的杰作。','可以说，五代绘画上承唐代、下启两宋，正是中国山水画走向成熟的关键一程。乱世的动荡，竟未能阻挡艺术的精进——这再次印证了文化自有其独立的生命。'],eth:['五代的民族格局，是“胡族建国、契丹压境”的复杂局面：后唐、后晋、后汉的统治者多出自沙陀，已深度融入中原；而北方新兴的契丹（辽），则借石敬瑭割让燕云十六州之机，把势力楔入华北腹地。','燕云的丧失，使中原王朝从此失去北方的天然屏障，埋下了宋辽对峙的远因。五代的民族交融与边防之失并存——入主的沙陀渐与汉人合流，崛起的契丹却成了此后数百年挥之不去的强邻。']},
+],pol:[['武人政治','骄兵悍将拥立废黜天子，纲常扫地。'],['频繁篡代','五十余年五朝相代、五姓十三君。'],['藩镇延续','沿唐末藩镇之习，节度使权重一方。'],['枢密用事','枢密院掌机要，武人秉政。'],['后周改革','郭威、柴荣励精图治、整军经武、革除积弊。']],eco:[['中原残破','战乱频仍，中原经济凋敝、民生困苦。'],['横征暴敛','军费浩繁、赋役苛重，民不聊生。'],['南方反盛','相较中原，南方诸国得以保境息民。'],['漕运疏浚','后周等疏浚漕渠、劝课农桑，稍有恢复。'],['货币紊乱','铸币杂乱、币值不稳，商旅维艰。']],mil:[['骄兵悍将','牙兵跋扈，动辄哗变、废立君主。'],['沙陀劲旅','后唐、后晋、后汉多倚沙陀骑兵之力。'],['燕云之失','后晋石敬瑭割燕云十六州、贻患数百年。'],['禁军改革','后周世宗整顿禁军、汰弱留强。'],['统一之机','周世宗北伐南征、锐意统一，惜早逝。']],cul:[['文教衰微','战乱之中，中原文教一度凋零。'],['冯道印经','冯道主持雕印儒家经典，刊刻“九经”。'],['词体渐兴','燕乐曲子词流行，为宋词张本。'],['花间一脉','西蜀《花间集》辑录词作，词风香软。'],['承唐启宋','文化于乱世中艰难延续、下启两宋。']],art:[['北方山水','荆浩、关仝开北方山水画派，气势雄峻。'],['南唐画院','南唐设画院，董源、巨然写江南山水。'],['人物传神','顾闳中《韩熙载夜宴图》传神写照。'],['书法承唐','杨凝式书法上承唐法、下启宋意。'],['承前启后','五代绘画为宋代山水巅峰张本。']],eth:[['沙陀建国','沙陀等内迁民族入主中原、建立数朝。'],['契丹崛起','北方契丹（辽）兴起，屡干中原之政。'],['燕云入辽','石敬瑭割燕云，契丹势力深入华北。'],['民族交融','沙陀等族渐融入汉地、难分彼此。'],['南诏大理','西南南诏、大理并立，各自发展。']],secsum:{pol:['五代政治，是唐末藩镇与武人之祸的延续。欧阳修作《新五代史》，对这半个世纪的“礼崩乐坏、纲常扫地”痛心疾首：骄兵悍将废立天子，所谓“天子兵强马壮者当为之”，纲常伦理荡然无存。','史家多视五代为一段“武人政治”的乱局：政权五十余年间五朝相代、五姓十三君如走马灯般更替。直到后周世宗柴荣励精图治、重整文治武功，统一的曙光才再度显现——其未竟之业，终由代周而立的宋太祖完成。'],eco:['五代的经济，深受战乱与武人苛政之累：中原屡经兵燹、横征暴敛，民生凋敝；唯赖后周等较有为的政权疏浚漕运、劝课农桑，才稍见恢复。','与中原的残破相比，同时期南方的“十国”却因相对安定而经济渐盛——这一南北的反差，恰恰加速了中国经济重心的进一步南移。乱世的中原失去的，正是南方悄然积累的。'],mil:['五代的军事，是“兵骄则逐帅、帅强则叛上”的恶性循环：牙兵悍将操纵废立，武力凌驾于一切之上。后晋石敬瑭更割让燕云十六州、自称“儿皇帝”，为中原王朝留下数百年的边防之痛。','转机出现在后周：世宗柴荣大力整顿禁军、汰弱留强，又北伐契丹、南征江淮，锐意统一。这支被重塑的精锐之师，最终成了赵匡胤陈桥兵变、开创赵宋的资本——五代的军事乱局，终于在制度的重建中走向终结。'],cul:['五代中原文教虽因战乱而衰微，却也有不可忽视的文化之举：后唐、后周间冯道主持雕版刊印儒家“九经”，开官方大规模印书之先河，为典籍的保存与普及立下大功。','而词这一新兴文体，正于五代悄然兴起——无论是西蜀《花间集》的香软，还是南唐李煜的沉痛，都为即将到来的宋词盛世埋下了种子。五代是承唐启宋的过渡，文脉于乱世中并未中断。'],art:['五代虽乱，绘画却悄然臻于一个高峰：荆浩、关仝开北方山水之雄峻，董源、巨然写江南山水之秀润，南北二派于此奠定；顾闳中《韩熙载夜宴图》更是人物画传神的杰作。','可以说，五代绘画上承唐代、下启两宋，正是中国山水画走向成熟的关键一程。乱世的动荡，竟未能阻挡艺术的精进——这再次印证了文化自有其独立的生命。'],eth:['五代的民族格局，是“胡族建国、契丹压境”的复杂局面：后唐、后晋、后汉的统治者多出自沙陀，已深度融入中原；而北方新兴的契丹（辽），则借石敬瑭割让燕云十六州之机，把势力楔入华北腹地。','燕云的丧失，使中原王朝从此失去北方的天然屏障，埋下了宋辽对峙的远因。五代的民族交融与边防之失并存——入主的沙陀渐与汉人合流，崛起的契丹却成了此后数百年挥之不去的强邻。']},
 },
 shiguo:{
 ov:`<p style="margin:2px 0 14px;padding-left:11px;border-left:3px solid var(--gold);color:var(--ink2);font-size:13.5px;line-height:1.78">与战乱频仍的中原“五代”相比，南方“十国”多得保境息民之利。史家常指出：正是这一时期江南的相对安定与持续开发，加速了中国经济重心的南移——吴越的水利、南唐的文教，皆为日后江南的繁盛埋下伏笔。</p><p>"十国"（902–979）指五代时期，在南方各地与河东先后并立的杨吴、南唐、吴越、前蜀、后蜀、闽、楚、南汉、荆南（南平）、北汉等十余个割据政权，与中原"五代"并称"五代十国"。除地处河东的北汉外，诸国多在南方；相较战乱频仍的中原，南方政局相对安定，得以保境息民、发展经济文化。</p><p>十国之中，南唐据有江淮、文物最盛，后主李煜虽亡国而以词冠绝千古；吴越钱氏据两浙、奉中原为正朔、保境安民、大兴水利（疏浚太湖、修筑海塘），又广建佛寺（杭州因之号"东南佛国"），最终"纳土归宋"、免于兵燹，泽被江南；前后蜀据天府、富庶安逸，词（《花间集》）与文化称盛；南汉据岭南、闽据福建，皆开发一方。这些政权的休养生息，使江南经济文化在唐宋之际持续繁荣，并最终和平融入北宋一统。</p>`,
@@ -4086,7 +4104,7 @@ states:[
 ['北汉','951–979','沙陀·刘崇','十国中唯一据于北方（河东）者，依附契丹以抗中原，国小民困，是十国中最后被北宋所灭的政权。',0,'太原（今山西太原）',[['951','刘崇据河东，依契丹'],['968','刘继元继立'],['979','降于北宋，十国终']]],
 ['荆南','924–963','高季兴','又称南平，十国中最弱小，仅据荆州数州之地；地当南北要冲，以向四方称臣、截留贡使著称，人称“高赖子”，国祚却不短。',0,'江陵（今荆州）',[]],
 ['楚','907–951','马殷','马殷据湖南所建（史称马楚），都长沙；通商贸、行茶马、铸铅铁钱以聚财，一度富庶；后因诸子争立而衰，为南唐所灭。',0,'长沙',[]]
-],pol:[['南方割据','杨吴、南唐、吴越等十余国分据南方。'],['保境息民','多数政权偏安自保、与民休息。'],['奉中原正朔','吴越等奉中原为正朔、纳贡求安。'],['北汉孤悬','唯北汉地处河东、依辽抗周。'],['纳土归宋','吴越、南唐等先后归附、免于兵燹。']],eco:[['江南开发','南方相对安定，农业、手工业持续发展。'],['吴越水利','吴越钱氏疏浚太湖、修筑海塘，泽被江南。'],['海外贸易','闽、南汉等地海舶通商，市舶之利丰厚。'],['蜀地富庶','前后蜀据天府之国，富庶安逸。'],['经济南移','南方经济渐超中原，重心持续南倾。']],mil:[['据险自保','凭山川形胜、划地自守，少有进取。'],['吴越保境','吴越奉行保境安民、不轻启战端。'],['南唐拓土','南唐曾灭闽、楚，一度为南方最强。'],['前后蜀','据剑阁之险、偏安巴蜀。'],['北汉抗周','北汉依辽屡抗后周、北宋。']],cul:[['南唐文物','南唐文物最盛，词、画、书法俱佳。'],['李煜词','后主李煜亡国之词，沉痛凄婉、冠绝千古。'],['花间词派','西蜀《花间集》辑录词作，开词之大观。'],['东南佛国','吴越广建佛寺，杭州号“东南佛国”。'],['文教南兴','南方文教渐盛，承续华夏文脉。']],art:[['南唐画院','南唐立翰林图画院，名家荟萃。'],['董源巨然','董源、巨然写江南山水，开“南宗”一脉。'],['夜宴图','顾闳中《韩熙载夜宴图》为人物画杰作。'],['秘色越窑','吴越秘色瓷温润如玉，贡于中原。'],['南方工艺','漆器、织造等手工艺精进。']],eth:[['汉人政权','十国多为汉人所建、承中原文化。'],['诸族杂处','与境内少数民族杂处、渐次融合。'],['南汉据岭','南汉据有岭南、开发珠江流域。'],['海外通使','与南海、东亚诸国通使贸易。'],['和平归宋','多数和平归附，融入统一的宋朝。']],secsum:{pol:['十国的政治，与战乱频仍的中原“五代”恰成对照：南方诸国多偏安自保、保境息民，政局相对安定。尤以吴越钱氏“事大以保民”——奉中原为正朔、纳贡称臣，换得两浙数十年太平。','史家常指出：正是这一“割据而不黩武”的格局，使南方得以在乱世中持续开发、积聚财富文教。最终吴越、南唐等“纳土归宋”、和平归附，既免去江南的兵燹之苦，也为北宋的统一与繁荣奉上了一份丰厚的家底。'],eco:['十国之中，南方诸国得保境息民之利，经济文化反较中原繁盛：吴越钱氏大兴水利、疏浚太湖、修筑捍海塘，使两浙成为膏腴之地；闽、南汉则凭海舶之利、广通海外。','这一时期南方的持续开发，是中国经济重心南移进程中关键的一环。当中原在五代的战火中残破时，江南、巴蜀、岭海却在割据的安定中悄然积累——为日后宋代“苏湖熟、天下足”的格局打下了坚实基础。'],mil:['十国的军事，多以“据险自保”为基调：诸国凭借长江、剑阁、岭岭等天险划地自守，少有逐鹿中原的雄心。其中南唐曾灭闽、楚，一度成为南方最强；吴越则始终奉行保境安民、不轻启战端。','这种“自保而不扩张”的姿态，固然使南方免于中原式的连年兵燹、得以休养生息，却也注定了诸国终将被北方统一的命运。十国的军事克制，换来的是江南的安宁与文教的繁荣——这未尝不是一种历史的智慧。'],cul:['十国的文化，以南唐与西蜀最为璀璨：南唐文物冠绝一时，后主李煜虽亡国，却以一阕阕沉痛凄婉的词作，把这一文体推向了艺术的巅峰；西蜀则有《花间集》辑录词章、开一代词风。','偏安的安定，为南方的文教提供了沃土：吴越广建佛寺、杭州号称“东南佛国”，江南的文脉在割据中不断滋长。十国虽小，却为宋代文化的全面繁荣，保存并培育了珍贵的种子。'],art:['十国的艺术，在南方安定的土壤上别开生面：南唐设画院、聚名家，董源与巨然以柔润的笔墨写江南烟岚，奠定了山水画“南宗”的根基；吴越的“秘色”越窑青瓷，更温润如玉、贡于中原。','这些成就表明，乱世的割据非但没有窒息艺术，反而因南方的安定与富庶而催生出新的高峰。十国的画与瓷，连同其词章，共同为北宋艺术的鼎盛铺就了一段从容的前奏。'],eth:['十国多为汉人建立的政权，承续中原文化，与境内的少数民族在长期共处中渐次融合；南汉据有岭南、开发珠江流域，南方诸国又多与海外通使贸易，使东南与岭海的开发更进一步。','与北方“五代”胡汉杂糅、契丹压境的格局不同，南方十国的民族关系相对平和。诸国最终多以和平方式归附北宋，使南方的人群与文化平稳地汇入了重归一统的中华——这是一段少有血腥的融合。']},
+],pol:[['南方割据','杨吴、南唐、吴越等十余国分据南方。'],['保境息民','多数政权偏安自保、与民休息。'],['奉中原正朔','吴越等奉中原为正朔、纳贡求安。'],['北汉孤悬','唯北汉地处河东、依辽抗周。'],['纳土归宋','吴越、南唐等先后归附、免于兵燹。']],eco:[['江南开发','南方相对安定，农业、手工业持续发展。'],['吴越水利','吴越钱氏疏浚太湖、修筑海塘，泽被江南。'],['海外贸易','闽、南汉等地海舶通商，市舶之利丰厚。'],['蜀地富庶','前后蜀据天府之国，富庶安逸。'],['经济南移','南方经济渐超中原，重心持续南倾。']],mil:[['据险自保','凭山川形胜、划地自守，少有进取。'],['吴越保境','吴越奉行保境安民、不轻启战端。'],['南唐拓土','南唐曾灭闽、楚，一度为南方最强。'],['前后蜀','据剑阁之险、偏安巴蜀。'],['北汉抗周','北汉依辽屡抗后周、北宋。']],cul:[['南唐文物','南唐文物最盛，词、画、书法俱佳。'],['李煜词','后主李煜亡国之词，沉痛凄婉、冠绝千古。'],['花间词派','西蜀《花间集》辑录词作，开词之大观。'],['东南佛国','吴越广建佛寺，杭州号“东南佛国”。'],['文教南兴','南方文教渐盛，承续华夏文脉。']],art:[['南唐画院','南唐立翰林图画院，名家荟萃。'],['董源巨然','董源、巨然写江南山水，开“南宗”一脉。'],['夜宴图','顾闳中《韩熙载夜宴图》为人物画杰作。'],['秘色越窑','吴越秘色瓷温润如玉，贡于中原。'],['南方工艺','漆器、织造等手工艺精进。']],eth:[['汉人政权','十国多为汉人所建、承中原文化。'],['诸族杂处','与境内少数民族杂处、渐次融合。'],['南汉据岭','南汉据有岭南、开发珠江流域。'],['海外通使','与南海、东亚诸国通使贸易。'],['和平归宋','多数和平归附，融入统一的宋朝。']],secsum:{pol:['十国的政治，与战乱频仍的中原“五代”恰成对照：南方诸国多偏安自保、保境息民，政局相对安定。尤以吴越钱氏“事大以保民”——奉中原为正朔、纳贡称臣，换得两浙数十年太平。','史家常指出：正是这一“割据而不黩武”的格局，使南方得以在乱世中持续开发、积聚财富文教。最终吴越、南唐等“纳土归宋”、和平归附，既免去江南的兵燹之苦，也为北宋的统一与繁荣奉上了一份丰厚的家底。'],eco:['十国之中，南方诸国得保境息民之利，经济文化反较中原繁盛：吴越钱氏大兴水利、疏浚太湖、修筑捍海塘，使两浙成为膏腴之地；闽、南汉则凭海舶之利、广通海外。','这一时期南方的持续开发，是中国经济重心南移进程中关键的一环。当中原在五代的战火中残破时，江南、巴蜀、岭海却在割据的安定中悄然积累——为日后宋代“苏湖熟、天下足”的格局打下了坚实基础。'],mil:['十国的军事，多以“据险自保”为基调：诸国凭借长江、剑阁、五岭等天险划地自守，少有逐鹿中原的雄心。其中南唐曾灭闽、楚，一度成为南方最强；吴越则始终奉行保境安民、不轻启战端。','这种“自保而不扩张”的姿态，固然使南方免于中原式的连年兵燹、得以休养生息，却也注定了诸国终将被北方统一的命运。十国的军事克制，换来的是江南的安宁与文教的繁荣——这未尝不是一种历史的智慧。'],cul:['十国的文化，以南唐与西蜀最为璀璨：南唐文物冠绝一时，后主李煜虽亡国，却以一阕阕沉痛凄婉的词作，把这一文体推向了艺术的巅峰；西蜀则有《花间集》辑录词章、开一代词风。','偏安的安定，为南方的文教提供了沃土：吴越广建佛寺、杭州号称“东南佛国”，江南的文脉在割据中不断滋长。十国虽小，却为宋代文化的全面繁荣，保存并培育了珍贵的种子。'],art:['十国的艺术，在南方安定的土壤上别开生面：南唐设画院、聚名家，董源与巨然以柔润的笔墨写江南烟岚，奠定了山水画“南宗”的根基；吴越的“秘色”越窑青瓷，更温润如玉、贡于中原。','这些成就表明，乱世的割据非但没有窒息艺术，反而因南方的安定与富庶而催生出新的高峰。十国的画与瓷，连同其词章，共同为北宋艺术的鼎盛铺就了一段从容的前奏。'],eth:['十国多为汉人建立的政权，承续中原文化，与境内的少数民族在长期共处中渐次融合；南汉据有岭南、开发珠江流域，南方诸国又多与海外通使贸易，使东南与岭海的开发更进一步。','与北方“五代”胡汉杂糅、契丹压境的格局不同，南方十国的民族关系相对平和。诸国最终多以和平方式归附北宋，使南方的人群与文化平稳地汇入了重归一统的中华——这是一段少有血腥的融合。']},
 },
 };
 function stateCards(a,accent){
@@ -4244,7 +4262,7 @@ function relatedTopicsHTML(id){var arr=relatedTopics(id);if(!arr.length)return '
     return '<div class="relgrp"><span class="relgl">'+g[1]+'</span><span class="tsee">'+sub.map(chip).join('')+'</span></div>';}).join('');
   return '<section class="mod" id="m-topics"><h3>相关专题</h3><p class="reltip">本朝在下列专题中作为关键节点出现，可由此转入纵向脉络：</p>'+grouped+'</section>';}
 function fillDynasty(id){
-  const d=DY.find(x=>x.id===id)||DY[17];
+  const d=DY.find(x=>x.id===id)||DY.find(x=>x.id==='tang')||DY[0];
   const pg=document.getElementById('page-dynasty');
   pg.style.setProperty('--accent',d.c);
   document.getElementById('dynBig').textContent=d.name;
@@ -4260,10 +4278,13 @@ function fillDynasty(id){
   if(relatedTopics(d.id).length)navmods.push(['topics','相关专题']);
   document.getElementById('subnav').innerHTML=navmods.map(([k,l],i)=>'<button data-k="'+k+'" class="'+(i===0?'on':'')+'" onclick="document.getElementById(\'m-'+k+'\').scrollIntoView({behavior:\'smooth\'})">'+l+'</button>').join('');
   document.getElementById('dynModules').innerHTML=py((C?compositeHTML(d):moduleHTML(d))+relatedTopicsHTML(d.id));
-  // scroll-spy
+  // scroll-spy（IntersectionObserver 不可用时静默跳过，仅失去高亮联动，不影响页面）
   if(spy)spy.disconnect();
-  spy=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){const k=en.target.id.replace('m-','');document.querySelectorAll('#subnav button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));}});},{rootMargin:'-110px 0px -70% 0px'});
-  document.querySelectorAll('#dynModules .mod').forEach(el=>spy.observe(el));
+  if(typeof IntersectionObserver!=='undefined'){
+    spy=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){const k=en.target.id.replace('m-','');document.querySelectorAll('#subnav button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));}});},{rootMargin:'-110px 0px -70% 0px'});
+    document.querySelectorAll('#dynModules .mod').forEach(el=>spy.observe(el));
+  }
+  if(typeof syncHeaderH==='function')requestAnimationFrame(syncHeaderH);
 }
 
 /* ========== 专题 ========== */
@@ -4760,7 +4781,7 @@ battle:{arc:`<p>在中国两千多年的治乱循环里，常有那么一两场�
 ['官渡之战','200','曹操 ── 袁绍','奇袭乌巢、以弱胜强，曹操遂定北方。'],
 ['赤壁之战','208','孙刘联军 ── 曹操','火攻破曹，曹无力南下，三分之势成。'],
 ['淝水之战','383','东晋 ── 前秦','以少胜多、风声鹤唳，南北对峙延续。'],
-['怛罗斯之战','751','唐 ── 大食','唐军失利、西域经略受挫，造纸术西传。'],
+['怛罗斯之战','751','唐 ── 大食','唐军失利、西域经略受挫；相传造纸术由此西传（一说与此役无直接因果）。'],
 ['崖山海战','1279','宋 ── 元','陆秀夫负帝蹈海，赵宋至此而亡。'],
 ['鄱阳湖之战','1363','朱元璋 ── 陈友谅','水战火攻、以少胜多，奠明开国之基。'],
 ['萨尔浒之战','1619','后金 ── 明','集中兵力、各个击破，明清攻守易势。'],
@@ -4821,12 +4842,12 @@ function fillTopic(id){
   document.title=t[2]+' · 华夏纪';
   const col=n=>{const dy=DY.find(d=>d.id===n[2]);return dy?dy.c:'#8a6b5a';};
   const strip='<div class="tstrip">'+T.nodes.map(function(n,i){var arr=(i<T.nodes.length-1?'<span class="tarrow">›</span>':'');
-    var tag=(/长程|长时段|总览|趋势|纵观/.test(n[0])||id==='litworks')
+    var tag=(/长程|长时段|总览|趋势|纵观/.test(n[0]))
       ?'<span class="tstage" style="--c:'+col(n)+'">'+n[0]+'</span>'
       :'<a class="tstage" style="--c:'+col(n)+'" href="#/dynasty/'+n[2]+'">'+n[0]+'</a>';
     return tag+arr;}).join('')+'</div>';
   const cards='<div class="tnodes">'+T.nodes.map(function(n){var inner='<div class="tnh">'+n[0]+'</div><p>'+n[1]+'</p>';
-    return (/长程|长时段|总览|趋势|纵观/.test(n[0])||id==='litworks')
+    return (/长程|长时段|总览|趋势|纵观/.test(n[0]))
       ?'<div class="tnode" style="--c:'+col(n)+'">'+inner+'</div>'
       :'<a class="tnode tnode-link" style="--c:'+col(n)+'" href="#/dynasty/'+n[2]+'">'+inner+'<span class="tn-go">进入该朝 ›</span></a>';}).join('')+'</div>';
   var seeHTML='';var sk=TOPIC_SEE[id];
@@ -5055,19 +5076,25 @@ function go(){
   PAGES.forEach(p=>document.getElementById('page-'+p).classList.toggle('show',p===base));
   const navmap={dynasty:'dynasties',topic:'topics',contrast:'topics'};const act=navmap[base]||base;
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.b===act));
-  document.getElementById('nav').classList.remove('open');
+  if(typeof toggleNav==='function')toggleNav(false);else document.getElementById('nav').classList.remove('open');
   document.getElementById('fabBack').classList.toggle('show',DETAIL_PAGES.includes(base));
   if(base==='home'&&!tlInit){tlInit=true;const sc=document.getElementById('tlscroll');if(sc)requestAnimationFrame(function(){sc.scrollLeft=Math.max(0,xpos(-221)-24);});}
   curHash=location.hash;
   const y=scrollMem.get(curHash)||0;
-  requestAnimationFrame(()=>window.scrollTo(0,y));
+  requestAnimationFrame(()=>{try{window.scrollTo({top:y,left:0,behavior:'instant'});}catch(e){window.scrollTo(0,y);}});
 }
 function syncThemeMeta(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',document.body.classList.contains('dark')?'#1d1a16':'#9c2b22');}
-function toggleTheme(){const dk=document.body.classList.toggle('dark');document.getElementById('themeBtn').textContent=dk?'◑':'◐';syncThemeMeta();try{localStorage.setItem('hxj-theme',dk?'dark':'light');}catch(e){}}
-try{if(localStorage.getItem('hxj-theme')==='dark'){document.body.classList.add('dark');document.getElementById('themeBtn').textContent='◑';}}catch(e){}
+function toggleNav(force){var nav=document.getElementById('nav'),btn=document.getElementById('mBtn');if(!nav)return;var open=(typeof force==='boolean')?force:!nav.classList.contains('open');nav.classList.toggle('open',open);if(btn)btn.setAttribute('aria-expanded',open?'true':'false');}
+document.addEventListener('click',function(e){var nav=document.getElementById('nav');if(nav&&nav.classList.contains('open')&&!e.target.closest('#nav')&&!e.target.closest('#mBtn'))toggleNav(false);});
+function toggleTheme(){const dk=document.body.classList.toggle('dark');document.documentElement.classList.toggle('dark',dk);document.getElementById('themeBtn').textContent=dk?'◑':'◐';syncThemeMeta();try{localStorage.setItem('hxj-theme',dk?'dark':'light');}catch(e){}}
+try{var _dk=document.documentElement.classList.contains('dark');if(_dk){document.body.classList.add('dark');var _tb=document.getElementById('themeBtn');if(_tb)_tb.textContent='◑';}}catch(e){}
+try{if(typeof matchMedia!=='undefined'&&matchMedia('(prefers-color-scheme:dark)').addEventListener){matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(ev){if(localStorage.getItem('hxj-theme')!==null)return;var on=ev.matches;document.documentElement.classList.toggle('dark',on);document.body.classList.toggle('dark',on);var b=document.getElementById('themeBtn');if(b)b.textContent=on?'◑':'◐';syncThemeMeta();});}}catch(e){}
 syncThemeMeta();
 
 /* ========== 初始化 ========== */
+/* 量取 header 实高写入 --hdh，使 subnav 吸顶位置与 .mod 滚动偏移随字号/换行自适应，不再硬编码 */
+function syncHeaderH(){var hd=document.querySelector('.hd');if(!hd)return;var h=Math.round(hd.getBoundingClientRect().height);var sub=document.querySelector('.subnav');var sh=(sub&&sub.offsetParent!==null)?Math.round(sub.getBoundingClientRect().height):44;document.documentElement.style.setProperty('--hdh',h+'px');document.documentElement.style.setProperty('--modtop',(h+sh+8)+'px');}
+syncHeaderH();window.addEventListener('resize',function(){clearTimeout(window._hdrz);window._hdrz=setTimeout(syncHeaderH,120);});
 assignLanes();renderTimeline();renderGrid();renderTopics();renderContrastPanel();renderSearch('');
 (function(){var ab=document.getElementById('page-about');if(ab)ab.innerHTML=py(ab.innerHTML);})();
 document.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var t=e.target;if(t&&t.getAttribute&&t.getAttribute('role')==='button'&&t.tagName!=='BUTTON'&&!t.closest('#tlInner')){e.preventDefault();t.click();}});
